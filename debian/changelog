@@ -1,0 +1,231 @@
+zero-lliurex-dni (0.37) xenial; urgency=medium
+
+  * Implemented changes to EPI
+  * Updated categorization
+
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Fri, 27 Apr 2018 11:43:50 +0200
+
+zero-lliurex-dni (0.36) xenial; urgency=medium
+
+  * Fix installation of DNIe when ACCV is previously installed
+
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Fri, 02 Jun 2017 09:54:12 +0200
+
+zero-lliurex-dni (0.35) xenial; urgency=high
+
+  * Bug fixed in 32 bits with error in library 
+
+ -- Daniel Duran Vecino <daduve@gmail.com>  Wed, 08 Jun 2016 09:34:19 +0200
+
+zero-lliurex-dni (0.34) xenial; urgency=high
+
+  * first release in xenial 
+
+ -- Daniel Duran Vecino <daduve@gmail.com>  Tue, 07 Jun 2016 13:51:36 +0200
+
+zero-lliurex-dni (0.30) trusty; urgency=high
+
+  * Removed debug mode (set -x) 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Fri, 15 May 2015 10:24:58 +0200
+
+zero-lliurex-dni (0.29) trusty; urgency=high
+
+  * Adding translations
+
+ -- Daniel Duran Vecino <daduve@gmail.com>  Fri, 15 May 2015 09:51:55 +0200
+
+zero-lliurex-dni (0.28) trusty; urgency=high
+
+  * Added dependences
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 14 May 2015 14:51:02 +0200
+
+zero-lliurex-dni (0.27) trusty; urgency=high
+
+  * Added translations
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 14 May 2015 10:28:17 +0200
+
+zero-lliurex-dni (0.25) trusty; urgency=high
+
+  * Added ACCV
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 14 May 2015 08:40:31 +0200
+
+zero-lliurex-dni (0.24) trusty; urgency=high
+
+  * Added su $USER -c "Command"
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Wed, 13 May 2015 14:22:36 +0200
+
+zero-lliurex-dni (0.23) trusty; urgency=high
+
+  * Updated pe
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Wed, 13 May 2015 13:12:46 +0200
+
+zero-lliurex-dni (0.22) trusty; urgency=high
+
+  * Updated pe
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Wed, 13 May 2015 12:56:27 +0200
+
+zero-lliurex-dni (0.21) trusty; urgency=high
+
+  * Removed dependences
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Wed, 13 May 2015 09:54:26 +0200
+
+zero-lliurex-dni (0.20) trusty; urgency=high
+
+  * Dummy upgrade
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Tue, 28 Apr 2015 09:47:05 +0200
+
+zero-lliurex-dni (0.19.1) trusty; urgency=medium
+
+  * upgrading for trusty 
+
+ -- Daniel Duran Vecino <daduve@gmail.com>  Mon, 19 Jan 2015 16:44:54 +0100
+
+zero-lliurex-dni (0.19) precise; urgency=high
+
+  * Added conflicts fich libpcks11-dnie
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Mon, 30 Jun 2014 08:58:05 +0200
+
+zero-lliurex-dni (0.18) precise; urgency=high
+
+  * Updated with a correct user 
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Thu, 19 Jun 2014 10:07:33 +0200
+
+zero-lliurex-dni (0.17) precise; urgency=high
+
+  * Updated, now:
+  * pe use false
+  * service false
+  * Launch new zenity on succesful exit
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Thu, 19 Jun 2014 10:01:57 +0200
+
+zero-lliurex-dni (0.16) precise; urgency=high
+
+  * Updated app file for zero-center 
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Wed, 18 Jun 2014 11:58:48 +0200
+
+zero-lliurex-dni (0.15) precise; urgency=high
+
+  * Updated for new zero-center
+  * Deleted setup lines for Chromium and Thunderbird
+  * Added DNIe banner
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Wed, 18 Jun 2014 11:41:57 +0200
+
+zero-lliurex-dni (0.14) precise; urgency=high
+
+  * Zenity interface 
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Tue, 26 Nov 2013 08:14:22 +0100
+
+zero-lliurex-dni (0.13) precise; urgency=high
+
+  * Changes on Chromium browser functions
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Mon, 25 Nov 2013 13:36:38 +0100
+
+zero-lliurex-dni (0.12) precise; urgency=high
+
+  * Changes on chromium-browser test
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Mon, 25 Nov 2013 12:45:22 +0100
+
+zero-lliurex-dni (0.11) precise; urgency=high
+
+  * Include libpkcs11-dnie as predependence
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Mon, 25 Nov 2013 11:55:45 +0100
+
+zero-lliurex-dni (0.10) precise; urgency=high
+
+  * Rebuild of source code
+  * This package change firefox, thunderbird 
+    and chromium-browser settings for DNIe.
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Mon, 25 Nov 2013 11:18:50 +0100
+
+zero-lliurex-dni (0.9) precise; urgency=high
+
+  * Changed dependences
+  * ZMD updated and added technology to clean the
+    environment
+
+ -- Francisco Javier Estellés Dasí <xaviestelles@gmail.com>  Tue, 19 Nov 2013 10:07:17 +0100
+
+zero-lliurex-dni (0.8) precise; urgency=low
+
+  * Adding traslations and images to htm files 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Fri, 02 Aug 2013 10:00:21 +0200
+
+zero-lliurex-dni (0.7) precise; urgency=low
+
+  * Added htm file for opensc-dnie and
+  * Deleted installation of opensc-dnie, 
+  * Incluyed Predepends 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Wed, 31 Jul 2013 12:41:25 +0200
+
+zero-lliurex-dni (0.6) precise; urgency=low
+
+  * Added enable module to zmd 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Thu, 06 Jun 2013 12:52:04 +0200
+
+zero-lliurex-dni (0.5) precise; urgency=low
+
+  * Added libnss3-tools dependence 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Tue, 04 Jun 2013 12:06:43 +0200
+
+zero-lliurex-dni (0.4) precise; urgency=low
+
+  * Changed installing opensc-dnie 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Mon, 03 Jun 2013 12:49:35 +0200
+
+zero-lliurex-dni (0.3) precise; urgency=low
+
+  * Fixed opensc-dnie 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Mon, 03 Jun 2013 12:13:36 +0200
+
+zero-lliurex-dni (0.2.2) precise; urgency=low
+
+  [ Angel Berlanas Vicente ]
+  * Updated messages 
+
+  [ Jaime Munyoz Fayos ]
+  * 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Mon, 03 Jun 2013 12:13:30 +0200
+
+zero-lliurex-dni (0.2.1) precise; urgency=low
+
+  * Added language
+
+ -- Angel Berlanas Vicente <angel.berlanas@gmail.com>  Fri, 31 May 2013 14:37:13 +0200
+
+zero-lliurex-dni (0.2) precise; urgency=low
+
+  * Fixed changelog 
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Thu, 30 May 2013 11:35:47 +0200
+
+zero-lliurex-dni (0.1) precise; urgency=low
+
+  * Initial release.
+
+ -- Jaime Munyoz Fayos <munyoz_jaifay@gva.es>  Thu, 30 May 2013 11:34:26 +0200

@@ -1,0 +1,299 @@
+#!/bin/bash
+
+
+USER=$(getent passwd | grep x:$PKEXEC_UID: | cut -d ":" -f 1) # User name
+USER_HOME="" # Home user folder
+FF_PROFILE_PATH="" # Absolute path to user firefox profile
+TH_PROFILE_PATH="" # Absolute path to user firefox profile
+#LIBRARY="/usr/lib/libpkcs11-dnietif.so"
+LIBRARY="/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
+
+
+ACTION="$1"
+
+
+user_home(){
+
+ 	USER_HOME=/home/$USER
+}
+
+
+test_running_firefox(){
+
+   is_running=$(ps -aux | grep /usr/lib/firefox/firefox | grep -v grep | wc -l)
+	if [ $is_running -gt 0 ]; then
+		while [ $is_running -gt 0 ] ; do 
+			echo "Firefox is running. Stop it!..."
+			is_running=$(ps -aux | grep /usr/lib/firefox/firefox | grep -v grep | wc -l)
+		done
+	fi
+	return 0
+}
+
+test_running_thunderbird(){
+
+   	is_running=$(ps -fe | grep thunderbird | grep -v grep | wc -l)
+	if [ $is_running -gt 0 ]; then
+		while [ $is_running -gt 0 ] ; do 
+			echo "Thunderbird is running. Stop it!"
+			is_running=$(ps -fe | grep thunderbird | grep -v grep | wc -l)
+		done
+	fi
+	return 0
+}
+
+
+test_installed_package(){
+
+   TEST=$( dpkg-query -s $1 2> /dev/null| grep Status | cut -d " " -f 4 )
+	if [ "$TEST" == 'installed' ]; then
+		return 0
+	else
+		return 1	
+	fi
+}
+
+
+get_firefox_default_profile(){
+   
+   # Getting Mozilla products default profile
+   # http://kb.mozillazine.org/Profiles.ini_file
+   #
+   # Get default profile info
+   # This script must be capable of dealing with multiple profiles
+   # and relative or absolute paths, for now ... buff!!
+   #
+   # This script get Default path profile if Default=1 or
+   # get first profile in other case
+ 
+   TMP_FILE=$(mktemp)
+   cat $FF_PATH/profiles.ini | awk -F ' *= *' '{ if ($1 ~ /^\[/) section=$1; else if ($1 !~ /^$/) print $1 section "=" "\"" $2 "\"" }' > $TMP_FILE
+   DEFAULT_EXISTS=$(grep ^Default $TMP_FILE)
+   if [ -n $DEFAULT_EXISTS ]; then
+        PROFILE_ID=$(cat $TMP_FILE | grep -m 1 Profile[0-9] | cut -d"[" -f 2 | cut -d"]" -f 1 )
+   else
+        PROFILE_ID=$(echo $DEFAULT_EXISTS | grep -m 1 Profile[0-9] | cut -d"[" -f 2 | cut -d"]" -f 1 )
+   fi
+   IS_RELATIVE=$(cat $TMP_FILE | grep $PROFILE_ID | grep ^IsRelative | cut -d"=" -f 2 | sed -e 's/\"//g')
+   TMP_PATH=$(cat $TMP_FILE | grep $PROFILE_ID | grep ^Path | cut -d"=" -f 2 | sed -e 's/\"//g')
+   if [ $IS_RELATIVE = "0" ]; then
+      FF_PROFILE_PATH=$TMP_PATH
+   else
+      FF_PROFILE_PATH=$FF_PATH/$TMP_PATH
+   fi
+   rm -f $TMP_FILE
+}
+
+
+get_thunderbird_default_profile(){
+   
+   # Getting Mozilla products default profile
+   # http://kb.mozillazine.org/Profiles.ini_file
+   #
+   # Get default profile info
+   # This script must be capable of dealing with multiple profiles
+   # and relative or absolute paths, for now ... buff!!
+   #
+   # This script get Default path profile if Default=1 or
+   # get first profile in other case
+ 
+   TMP_FILE=$(mktemp)
+   cat $TH_PATH/profiles.ini | awk -F ' *= *' '{ if ($1 ~ /^\[/) section=$1; else if ($1 !~ /^$/) print $1 section "=" "\"" $2 "\"" }' > $TMP_FILE
+   DEFAULT_EXISTS=$(grep ^Default $TMP_FILE)
+   if [ -n $DEFAULT_EXISTS ]; then
+        PROFILE_ID=$(cat $TMP_FILE | grep -m 1 Profile[0-9] | cut -d"[" -f 2 | cut -d"]" -f 1 )
+   else
+        PROFILE_ID=$(echo $DEFAULT_EXISTS | grep -m 1 Profile[0-9] | cut -d"[" -f 2 | cut -d"]" -f 1 )
+   fi
+   IS_RELATIVE=$(cat $TMP_FILE | grep $PROFILE_ID | grep ^IsRelative | cut -d"=" -f 2 | sed -e 's/\"//g')
+   TMP_PATH=$(cat $TMP_FILE | grep $PROFILE_ID | grep ^Path | cut -d"=" -f 2 | sed -e 's/\"//g')
+   if [ $IS_RELATIVE = "0" ]; then
+      TH_PROFILE_PATH=$TMP_PATH
+   else
+      TH_PROFILE_PATH=$TH_PATH/$TMP_PATH
+   fi
+   rm -f $TMP_FILE
+}
+
+
+init_secmod_firefox(){
+
+  if [ -f "$FF_PROFILE_PATH/secmod.db" ]; then
+  		echo "Removing ACCV module in Firefox"
+   	 rm $FF_PROFILE_PATH/secmod.db
+  fi
+
+}
+
+
+init_secmod_thunderbird(){
+
+  if [ -f "$TH_PROFILE_PATH/secmod.db" ]; then
+  		echo "Removing ACCV module in Thunderbird"
+    	rm $TH_PROFILE_PATH/secmod.db
+  fi
+
+}
+
+
+remove_dnie_module_firefox(){
+
+
+	echo "Removing DNIe modules in Firefox..."
+	su -c "modutil -disable $FF_MODULE_NAME -force -dbdir sql:$FF_PROFILE_PATH 2>&1" $USER
+	su -c "modutil -delete $FF_MODULE_NAME -force -dbdir sql:$FF_PROFILE_PATH 2>&1" $USER
+
+}
+
+remove_dnie_module_thunderbird(){
+
+	echo "Removing DNIe modules in Thunderbird..."
+	su -c "modutil -disable $TH_MODULE_NAME -force -dbdir sql:$TH_PROFILE_PATH 2>&1" $USER
+  	su -c "modutil -delete $TH_MODULE_NAME -force -dbdir sql:$TH_PROFILE_PATH 2>&1" $USER
+}
+
+
+enable_dnie_module_firefox(){
+
+	echo "Enabling DNIe modules in Firefox..."
+	su -c "modutil -add $FF_MODULE_NAME -force -libfile $LIBRARY -dbdir sql:$FF_PROFILE_PATH 2>&1" $USER
+  	su -c "modutil -enable $FF_MODULE_NAME -force -dbdir sql:$FF_PROFILE_PATH 2>&1" $USER
+
+}
+
+
+enable_dnie_module_thunderbird(){
+
+	echo "Enabling DNIe modules in Thunderbid..."
+	su -c "modutil -add $TH_MODULE_NAME -force -libfile $LIBRARY -dbdir sql:$TH_PROFILE_PATH 2>&1" $USER
+  	su -c "modutil -enable $TH_MODULE_NAME -force -dbdir sql:$TH_PROFILE_PATH 2>&1" $USER
+	
+}
+
+
+test_firefox_user_profile() {
+
+   if [ -d $FF_PATH ]; then
+   		get_firefox_default_profile
+   		if [ ! -d $FF_PROFILE_PATH ]; then
+    	   	echo "Error: Some problem with firefox profile"
+       		return 1
+   		fi
+		return 0
+   else
+   		echo "Creating Firefox profile. Now it will be launched, then please close Firefox and installation continues"
+      
+		su -c "firefox" $USER
+		test_running_firefox
+		get_firefox_default_profile
+		return 0
+   fi
+	
+}
+
+test_thunderbird_user_profile() {
+
+   if [ -d $TH_PATH ]; then
+   		get_thunderbird_default_profile
+   		if [ ! -d $TH_PROFILE_PATH ]; then
+        	echo "Error: some problem with thunderbird profile"
+        	return 1
+   		fi
+		return 0
+   else
+   		echo "Creating Thunderbird profile. Now it will be launched, then please close Thunderbird and installation continues"
+		su -c "thunderbird" $USER
+		test_running_thunderbird
+		get_thunderbird_default_profile
+		return 0
+   fi
+	
+}
+
+do_firefox(){
+
+   test_installed_package firefox
+   TESTED=$?
+   if [ "$TESTED" == "0" ] ; then
+		test_running_firefox
+		if [ $? -gt 0 ]; then
+			echo "Firefox is running. Stop it!..."
+         	exit 2
+	   	else
+			test_firefox_user_profile
+			if [ $? == 0 ]; then
+				  #init_secmod_firefox
+				  remove_dnie_module_firefox
+				  enable_dnie_module_firefox
+          if ! [ $? -eq 0 ];then
+              echo "Configuration of the DNI module in Firefox has failed"
+              exit 1
+          else
+              echo "Configuration of the DNI module in Firefox completed successfully"  
+          fi   
+			else
+				  exit 1
+			fi
+		fi
+   else
+      echo "Firefox is not installed"
+	  exit 1
+   fi
+}
+
+
+
+do_thunderbird(){
+
+   test_installed_package thunderbird
+   TESTED=$?
+   if [ "$TESTED" == "0" ] ; then
+		test_running_thunderbird
+		if [ $? -gt 0 ]; then
+			echo "Thunderbird is running. Stop it!"
+       		exit 2
+   		else
+			test_thunderbird_user_profile
+			if [ $? == 0 ]; then
+        		#init_secmod_thunderbird
+          		remove_dnie_module_thunderbird
+       			enable_dnie_module_thunderbird
+          if ! [ $? -eq 0 ];then
+              echo "Configuration of the DNI module in Thunderbird has failed"
+              exit 1
+          else
+              echo "Configuration of the DNI module in Thunderbird completed successfully"
+          fi   
+
+			else
+				  exit 1
+			fi
+		fi
+   else
+      
+        echo "Thunderbird is not installed"
+        exit 1
+   fi
+}
+
+
+case $ACTION in
+
+	postInstall)
+		
+		user_home
+		sleep 1
+		echo "Configuring DNIe modules in Firefox..."
+		FF_MODULE_NAME="DNI_E"
+		FF_PATH="$USER_HOME/.mozilla/firefox"
+		do_firefox
+		echo "Configuring DNIe modules in Thunderbird..."
+		TH_MODULE_NAME="DNI_E"
+		TH_PATH="$USER_HOME/.thunderbird"
+		do_thunderbird
+    echo "DNI module configuration completed successfully"
+    
+	;;
+
+esac
+exit 0

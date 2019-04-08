@@ -1,6 +1,6 @@
 {
 	"type":"apt",
-	"pkg_list": [{"name":"opensc-pkcs11","key_store":"zero-lliurex-dni"}], 
+	"pkg_list": [{"name":"libpkcs11-dnietif","key_store":"zero-lliurex-dni"}], 
 	"script": {"name":"/usr/share/zero-lliurex-dni/dnie_script"},
 	"required_x":true,
 	"zomando":"zero-lliurex-dni"

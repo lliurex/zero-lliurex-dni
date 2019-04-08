@@ -1,3 +1,9 @@
+zero-lliurex-dni (0.48) bionic; urgency=medium
+
+  * Changed to use libpkcs11-dnietif
+
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Mon, 08 Apr 2019 12:43:28 +0200
+
 zero-lliurex-dni (0.47) bionic; urgency=medium
 
   * Initial release for bionic

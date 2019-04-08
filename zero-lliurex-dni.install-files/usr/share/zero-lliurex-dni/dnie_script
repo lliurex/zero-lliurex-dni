@@ -5,8 +5,8 @@ USER=$(getent passwd | grep x:$PKEXEC_UID: | cut -d ":" -f 1) # User name
 USER_HOME="" # Home user folder
 FF_PROFILE_PATH="" # Absolute path to user firefox profile
 TH_PROFILE_PATH="" # Absolute path to user firefox profile
-#LIBRARY="/usr/lib/libpkcs11-dnietif.so"
-LIBRARY="/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
+LIBRARY="/usr/lib/libpkcs11-dnietif.so"
+#LIBRARY="/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so"
 
 
 ACTION="$1"

@@ -1,3 +1,9 @@
+zero-lliurex-dni (0.49) bionic; urgency=medium
+
+  * Added custom icon to show in epi
+  
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Tue, 07 Jul 2020 10:59:01 +0200
+
 zero-lliurex-dni (0.48) bionic; urgency=medium
 
   * Changed to use libpkcs11-dnietif

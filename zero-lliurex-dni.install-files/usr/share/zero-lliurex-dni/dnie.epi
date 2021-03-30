@@ -1,6 +1,6 @@
 {
 	"type":"apt",
-	"pkg_list": [{"name":"libpkcs11-dnie","key_store":"zero-lliurex-dni","custom_icon":"dnie.png"}], 
+	"pkg_list": [{"name":"libpkcs11-dnie","key_store":"zero-lliurex-dni","custom_icon":"dnie.png","custom_name":"DNI-e"}], 
 	"script": {"name":"/usr/share/zero-lliurex-dni/dnie_script"},
 	"custom_icon_path":"/usr/share/zero-lliurex-dni/",
 	"required_x":true,

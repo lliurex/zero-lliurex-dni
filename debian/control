@@ -1,0 +1,12 @@
+Source: zero-lliurex-dni
+Section: admin
+Priority: optional
+Maintainer: Equipo LliureX <lliurex@gva.es>
+Build-Depends: debhelper (>= 10),llxsrchelper,zero-dev
+Standards-Version: 4.1.2
+
+Package: zero-lliurex-dni
+Architecture: all
+Depends:epi-gtk,libnss3-tools,pcscd,pcsc-tools
+Description: DNI-e Installer
+ Installer for DNI-e

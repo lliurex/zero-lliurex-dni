@@ -1,6 +1,6 @@
 {
 	"type":"apt",
-	"pkg_list": [{"name":"libpkcs11-dnietif","key_store":"zero-lliurex-dni","custom_icon":"dnie.png"}], 
+	"pkg_list": [{"name":"libpkcs11-dnietif","key_store":"zero-lliurex-dni","custom_name":"DNI-e: install the DNI-e module in Firefox","custom_icon":"dnie.png"}], 
 	"script": {"name":"/usr/share/zero-lliurex-dni/dnie_script"},
 	"custom_icon_path":"/usr/share/zero-lliurex-dni/",
 	"required_x":true,

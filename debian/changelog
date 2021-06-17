@@ -1,3 +1,10 @@
+zero-lliurex-dni (0.49.1) bionic-updates; urgency=medium
+
+  * Added custon name in epi file
+  * Fixed zero app file
+  
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Thu, 17 Jun 2021 10:50:58 +0200
+
 zero-lliurex-dni (0.49) bionic; urgency=medium
 
   * Added custom icon to show in epi

@@ -1,3 +1,10 @@
+zero-lliurex-dni (0.59.3) focal; urgency=medium
+
+  * Fixed custom name in epi file
+  * Fixed zero app file
+  
+ -- Juan Ramon Pelegrina <juapesai@hotmail.com>  Thu, 17 Jun 2021 10:29:19 +0200
+
 zero-lliurex-dni (0.59.2) focal; urgency=medium
 
   * Fixed zero app file

@@ -1,11 +1,13 @@
 Name=zero-lliurex-dni
 Name[en]=Asistente del DNI-e
 Name[es]=Asistente del DNI-e
+Name[qcv]=Auxiliar del DNI-e
 Name[¢a@valencia]=Auxiliar del DNI-e
 Name[ca]=Auxiliar del DNI-e
 Name[ca_ES]=Auxiliar del DNI-e
 Comment=Setup DNI-e module for firefox
 Comment[es]=Configura el módulo del DNI-e en el Firefox
+Comment[qcv]=Configura el mòdul del DNI-e al Firefox
 Comment[ca@valencia]=Configura el mòdul del DNI-e al Firefox
 Comment[ca]=Configura el mòdul del DNI-e al Firefox
 Comment[ca_ES]=Configura el mòdul del DNI-e al Firefox
